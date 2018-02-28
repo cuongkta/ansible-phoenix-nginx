@@ -1,0 +1,10 @@
+---
+
+- name: install base packages
+  apt: name={{ item }} state=latest
+  become: yes
+  with_items:
+    - python-pip
+    - npm
+    - inotify-tools
+

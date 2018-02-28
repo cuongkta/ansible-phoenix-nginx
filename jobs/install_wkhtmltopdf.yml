@@ -1,0 +1,38 @@
+---
+
+- name: install wkhtmltopdf 
+  unarchive: src=resources/wkhtmltopdf/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz dest=/opt/ copy=yes
+  sudo: yes
+
+- name: create symlink wkhtmltopdf
+  file:
+    src=/opt/wkhtmltox/bin/wkhtmltopdf
+    dest=/usr/bin/wkhtmltopdf
+    owner=root
+    group=root
+    state=link
+  sudo: yes
+
+- name: create symlink wkhtmltoimage
+  file:
+    src=/opt/wkhtmltox/bin/wkhtmltoimage
+    dest=/usr/bin/wkhtmltoimage
+    owner=root
+    group=root
+    state=link
+  sudo: yes
+
+- name: install libXrender
+  yum: name={{ item }} state=latest
+  become: yes
+  with_items:
+    - libXrender
+    - fontconfig
+    - urw-fonts
+    - libXext
+    - xorg-x11-fonts-75dpi
+    - xorg-x11-fonts-Type1
+
+- name: install imgkit
+  pip: name=imgkit
+  become: yes

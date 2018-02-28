@@ -1,0 +1,52 @@
+---
+
+- name: install nginx
+  apt: name=nginx
+  become: yes
+
+# - name: install firewalld
+#   apt: name=firewalld
+#   become: yes
+
+#   # sudo systemctl start nginx
+#   # sudo firewall-cmd --permanent --zone=public --add-service=http 
+#   # sudo firewall-cmd --permanent --zone=public --add-service=https
+#   # sudo firewall-cmd --reload
+#   # sudo firewall-cmd --reload
+
+# - name: allow HTTP and HTTPS traffic 
+#   firewalld: service=https permanent=true state=enabled zone=public
+#   become: yes
+#   ignore_errors: yes
+
+# - name: allow HTTP and HTTPS traffic 
+#   firewalld: service=http permanent=true state=enabled zone=public
+#   become: yes
+#   ignore_errors: yes
+
+# - name: open listen port/tcp
+#   firewalld: zone=public port=80/tcp permanent=true state=enabled immediate=true
+#   become: yes
+#   ignore_errors: yes
+
+- name: enable ufw
+  shell: ufw enable
+  become_user: root 
+
+- name: allow http
+  command: ufw allow 'Nginx HTTP'
+  become: yes
+
+- name: start and enable nginx service
+  service: name=nginx state=started enabled=yes
+  become: yes
+  ignore_errors: yes
+
+- name: copy config file 
+  copy:
+    src: resources/nginx/server
+    dest: /etc/nginx/sites-enabled/
+  when: pure_server
+  become: yes
+
+# install git

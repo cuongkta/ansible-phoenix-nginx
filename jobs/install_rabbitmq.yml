@@ -1,0 +1,23 @@
+---
+
+- name: install rabbitmq-server 
+  yum: name=rabbitmq-server state=latest
+  sudo: yes
+
+- name: start rabbitmq service
+  service: name=rabbitmq-server state=started enabled=yes
+  sudo: yes
+
+# - name: firewall port 
+#   command: firewall-cmd --permanent --add-port=5672/tcp
+#   sudo: yes
+- name: open listen port/tcp
+  firewalld: zone=public port=5672/tcp permanent=true state=enabled immediate=true
+  become: yes
+  ignore_errors: yes
+  
+- name: start and enable firewalld service
+  service: name=firewalld state=restarted
+  sudo: yes
+
+

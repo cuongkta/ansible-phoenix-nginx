@@ -1,0 +1,2 @@
+[server]
+192.168.10.179 ansible_connection=ssh  ansible_user=cuongta ansible_ssh_private_key_file=/home/cuongta/.ssh/id_rsa.pub

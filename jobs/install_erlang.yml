@@ -1,0 +1,31 @@
+---
+
+# - name: copy erlang 
+#   copy:
+#     src: resources/erlang/erlang-solutions_1.0_all.deb
+#     dest: /opt/
+#   #unarchive: src=resources/erlang/erlang-solutions_1.0_all.deb dest=/opt/ copy=yes
+#   become: yes
+
+
+- name: install .deb erlang
+  apt: 
+    deb: https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+  become: yes
+
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+  become: yes
+
+# - name: Upgrade all packages to the latest version
+#   apt:
+#     update_cache: yes
+#     upgrade: yes
+
+- name: install erlang, elixir
+  apt: name={{ item }} state=latest
+  become: yes
+  with_items:
+    - esl-erlang
+    - elixir

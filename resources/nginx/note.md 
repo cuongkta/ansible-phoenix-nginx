@@ -1,0 +1,9 @@
+config: /etc/nginx/ngix.conf
+
+
+`sudo systemctl start nginx`
+`sudo systemctl enable nginx`
+
+
+
+Copy file config `server` into: /etc/nginx/sites-enabled/ 

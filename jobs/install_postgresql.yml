@@ -1,0 +1,37 @@
+---
+
+# - name: stop old postgresql service
+#   service: name=postgresql state=stopped
+#   when: postgresql_drop_old_cluster
+
+# - name: remove old postgresql cluster
+#   #command: rm -rf /var/lib/pgsql/data
+#   file: path=/var/lib/pgsql/data state=absent
+#   when: postgresql_drop_old_cluster
+
+- name: install postgressql
+  apt: name={{ item }} state=latest
+  become: yes
+  with_items:
+    - postgresql-contrib
+    - postgresql
+
+- name: install psycopg2 python module
+  pip: name=psycopg2
+
+
+- name: create postgres user for deployer
+  postgresql_user:
+    name: "{{ dbuser }}"
+    password: "{{ dbpassword }}"
+    role_attr_flags: CREATEDB,SUPERUSER
+  become: yes
+  become_user: postgres
+
+
+- name: "create database"
+  postgresql_db: name="{{ dbname }}" encoding="UTF-8"
+  become: yes
+  become_user: postgres
+
+

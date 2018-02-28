@@ -1,0 +1,36 @@
+---
+
+
+- name: install server
+  hosts: all
+  serial: 1 #concurent processing nodes
+
+
+  sudo: yes
+  remote_user: root
+  gather_facts: no
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
+  
+  vars:
+    # Database Vars
+    
+
+    dbname: sample_data
+    dbuser: postgres
+    dbpassword: postgres
+    postgresql_drop_old_cluster: false # pls change to false with pure server
+    pure_server: true
+
+  tasks:
+    - include: jobs/install_base_package.yml 
+    - include: jobs/install_common_tool.yml
+    - include: jobs/install_nginx.yml 
+    - include: jobs/install_erlang.yml
+    - include: jobs/install_postgresql.yml
+    - include: jobs/install_redis.yml
+    #- include: jobs/install_wkhtmltopdf.yml
+    #- include: jobs/install_rabbitmq.yml
+    #- include: jobs/install_celery.yml
+    
