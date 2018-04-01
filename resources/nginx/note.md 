@@ -7,3 +7,9 @@ config: /etc/nginx/ngix.conf
 
 
 Copy file config `server` into: /etc/nginx/sites-enabled/ 
+
+
+
+Create simple authen for a port: 
+`sudo apt-get install apache2-utils`
+`sudo htpasswd -c /etc/nginx/.htpasswd cuongta`
