@@ -36,7 +36,9 @@
 
 
 #go to postgresql in server and enable pg_stream for 
-#CREATE EXTENSION pg_trgm;
-#CREATE EXTENSION unaccent; # unaccent('èéêë') ->> eeee
+
  
 #sudo -u postgres psql , use command in server
+#\c real_estate_dev
+#CREATE EXTENSION pg_trgm;
+#CREATE EXTENSION unaccent; # unaccent('èéêë') ->> eeee

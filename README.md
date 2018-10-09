@@ -11,18 +11,16 @@ Install:
 
 
 
-If use mariadb, pls check link :
-
- Set username/password for current server
-
- https://stackoverflow.com/questions/42511474/check-mk-installation-failed-dependencies-mariadb-python-reportlab-libgsf/42550101#42550101
-
 
 
 
 
 Something have to do manually: 
 
+1. Clone source code. 
+2. Copy prod.secret.ex into config
+3. Initial server by script in home
+4. Remove default config in sites-enabled,  copy file `server` from local into nginx
 
 
 Start server in background: 

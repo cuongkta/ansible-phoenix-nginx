@@ -7,5 +7,6 @@
     - python-pip
     - npm
     - inotify-tools
+    - imagemagick
 #- apache2-utils
 
