@@ -42,3 +42,7 @@
 #\c real_estate_dev
 #CREATE EXTENSION pg_trgm;
 #CREATE EXTENSION unaccent; # unaccent('èéêë') ->> eeee
+
+
+#config file: /etc/postgresql/9.5/main/postgresql.conf
+#restart: sudo service postgresql restart
